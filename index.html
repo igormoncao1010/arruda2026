@@ -820,11 +820,6 @@
                 flex-direction: column;
             }
             
-            .popup-content {
-                overflow-y: visible;
-                max-height: none;
-            }
-            
             .hero-section {
                 height: 80vh;
                 margin-top: 56px;
@@ -1028,6 +1023,290 @@
             
             .humans-content {
                 font-size: 0.95rem;
+            }
+        }
+
+        /* GALERIA DE FOTOS SIMPLES */
+        .gallery-section {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 80px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gallery-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .gallery-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .gallery-title {
+            font-size: 2.5rem;
+            font-weight: 400;
+            color: white;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .gallery-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, #1e90ff, #4169e1);
+            border-radius: 2px;
+        }
+
+        .gallery-subtitle {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            aspect-ratio: 4/3;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(30, 144, 255, 0.3);
+            border-color: rgba(30, 144, 255, 0.4);
+        }
+
+        .gallery-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .gallery-item:hover .gallery-image {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+            padding: 25px 20px;
+            transform: translateY(100%);
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+
+        .gallery-caption {
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .gallery-date {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+            font-style: italic;
+        }
+
+        /* Lightbox Modal */
+        .lightbox-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 3000;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .lightbox-modal.active {
+            display: block;
+            opacity: 1;
+        }
+
+        .lightbox-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.9);
+            width: 90%;
+            max-width: 900px;
+            max-height: 85vh;
+            transition: transform 0.4s ease;
+        }
+
+        .lightbox-modal.active .lightbox-content {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .lightbox-image-container {
+            position: relative;
+            width: 100%;
+            height: 70vh;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .lightbox-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background: #000;
+        }
+
+        .lightbox-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            color: white;
+            text-align: center;
+        }
+
+        .lightbox-title {
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .lightbox-description {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.95rem;
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            transform: translateY(-50%);
+            pointer-events: none;
+        }
+
+        .lightbox-button {
+            background: rgba(30, 144, 255, 0.3);
+            border: 1px solid rgba(30, 144, 255, 0.5);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 20px;
+            transition: all 0.3s ease;
+            pointer-events: all;
+            backdrop-filter: blur(10px);
+        }
+
+        .lightbox-button:hover {
+            background: rgba(30, 144, 255, 0.5);
+            border-color: rgba(30, 144, 255, 0.8);
+            transform: scale(1.1);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .lightbox-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg);
+        }
+
+        @media (max-width: 768px) {
+            .gallery-section {
+                padding: 60px 20px;
+            }
+            
+            .gallery-title {
+                font-size: 2rem;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 20px;
+            }
+            
+            .gallery-item {
+                aspect-ratio: 3/2;
+            }
+            
+            .lightbox-image-container {
+                height: 50vh;
+            }
+            
+            .lightbox-button {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .gallery-title {
+                font-size: 1.8rem;
             }
         }
 
@@ -1369,6 +1648,578 @@
                 width: 100%;
             }
         }
+        
+        /* CORREÇÃO PARA MOBILE - MANTENDO SCROLL APENAS NO POPUP */
+        @media (max-width: 768px) {
+            .popup-content {
+                overflow-y: auto !important;
+                max-height: calc(90vh - 140px) !important;
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            .donation-popup {
+                display: flex;
+                flex-direction: column;
+                max-height: 90vh;
+                overflow: hidden;
+            }
+            
+            .popup-buttons {
+                margin-top: 20px;
+                flex-shrink: 0;
+                padding-top: 15px;
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /* SEÇÃO DE PLANOS DE GOVERNO */
+.plans-section {
+    background: linear-gradient(135deg, #0a1929 0%, #0c2340 100%);
+    padding: 80px 20px;
+    position: relative;
+    overflow: hidden;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.plans-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(30, 144, 255, 0.5), transparent);
+}
+
+.plans-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+.plans-header {
+    text-align: center;
+    margin-bottom: 60px;
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+.plans-title {
+    font-size: 2.8rem;
+    font-weight: 400;
+    color: white;
+    margin-bottom: 20px;
+    position: relative;
+    display: inline-block;
+    letter-spacing: -0.5px;
+}
+
+.plans-title::after {
+    content: '';
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: linear-gradient(90deg, #1e90ff, #4169e1);
+    border-radius: 2px;
+}
+
+.plans-subtitle {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.1rem;
+    max-width: 700px;
+    margin: 30px auto 0;
+    line-height: 1.7;
+    font-weight: 300;
+}
+
+.plans-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+    margin-bottom: 60px;
+}
+
+.plan-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    padding: 35px 30px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    animation: fadeInUp 0.6s ease forwards;
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.plan-card:nth-child(1) { animation-delay: 0.1s; }
+.plan-card:nth-child(2) { animation-delay: 0.2s; }
+.plan-card:nth-child(3) { animation-delay: 0.3s; }
+.plan-card:nth-child(4) { animation-delay: 0.4s; }
+.plan-card:nth-child(5) { animation-delay: 0.5s; }
+.plan-card:nth-child(6) { animation-delay: 0.6s; }
+
+.plan-card:hover {
+    transform: translateY(-10px);
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(30, 144, 255, 0.4);
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.3),
+        0 0 0 1px rgba(30, 144, 255, 0.2),
+        0 8px 30px rgba(30, 144, 255, 0.15);
+}
+
+.plan-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #1e90ff, #4169e1);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.plan-card:hover::before {
+    opacity: 1;
+}
+
+.plan-icon {
+    width: 60px;
+    height: 60px;
+    background: rgba(30, 144, 255, 0.1);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 25px;
+    border: 1px solid rgba(30, 144, 255, 0.2);
+}
+
+.plan-icon svg {
+    width: 30px;
+    height: 30px;
+    color: #1e90ff;
+}
+
+.plan-title {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 20px;
+    line-height: 1.3;
+}
+
+.plan-features {
+    list-style: none;
+    margin-bottom: 30px;
+}
+
+.plan-features li {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.95rem;
+    margin-bottom: 12px;
+    padding-left: 24px;
+    position: relative;
+    line-height: 1.5;
+}
+
+.plan-features li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: #1e90ff;
+    font-weight: bold;
+}
+
+.plan-metrics {
+    display: flex;
+    gap: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.metric {
+    text-align: center;
+    flex: 1;
+}
+
+.metric-value {
+    display: block;
+    color: white;
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.metric-label {
+    display: block;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.85rem;
+}
+
+/* Resumo dos Planos */
+.plans-summary {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 24px;
+    padding: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px);
+    animation: fadeInUp 0.8s ease forwards;
+    opacity: 0;
+    animation-delay: 0.7s;
+}
+
+.summary-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.summary-title {
+    color: white;
+    font-size: 2rem;
+    font-weight: 400;
+    margin-bottom: 25px;
+}
+
+.summary-text {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 40px;
+}
+
+.summary-text strong {
+    color: white;
+    font-weight: 500;
+}
+
+.summary-metrics {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.summary-metric {
+    text-align: center;
+    min-width: 150px;
+}
+
+.summary-value {
+    display: block;
+    color: #1e90ff;
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.summary-label {
+    display: block;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.95rem;
+}
+
+.summary-actions {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.download-plan, .share-plan {
+    padding: 16px 32px;
+    border-radius: 50px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: none;
+}
+
+.download-plan {
+    background: linear-gradient(135deg, #1e90ff, #4169e1);
+    color: white;
+    box-shadow: 0 8px 25px rgba(30, 144, 255, 0.3);
+}
+
+.download-plan:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 35px rgba(30, 144, 255, 0.4);
+}
+
+.share-plan {
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.share-plan:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+.download-plan svg, .share-plan svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Modal do Plano */
+.plan-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 3000;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    backdrop-filter: blur(15px);
+}
+
+.plan-modal.active {
+    display: block;
+    opacity: 1;
+}
+
+.plan-modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.95);
+    width: 90%;
+    max-width: 900px;
+    max-height: 85vh;
+    background: rgba(15, 25, 40, 0.95);
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+    transition: transform 0.4s ease;
+}
+
+.plan-modal.active .plan-modal-content {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.plan-modal-header {
+    padding: 30px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.plan-modal-header h2 {
+    color: white;
+    font-size: 1.8rem;
+    font-weight: 400;
+}
+
+.close-modal {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 18px;
+    transition: all 0.3s ease;
+}
+
+.close-modal:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: rotate(90deg);
+}
+
+.plan-modal-body {
+    padding: 30px;
+    max-height: calc(85vh - 100px);
+    overflow-y: auto;
+}
+
+.modal-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 20px;
+}
+
+.tab-button {
+    padding: 12px 24px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.tab-button:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.tab-button.active {
+    background: linear-gradient(135deg, #1e90ff, #4169e1);
+    color: white;
+    border-color: rgba(30, 144, 255, 0.4);
+}
+
+.tab-content {
+    display: none;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.7;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.tab-content h3 {
+    color: white;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    font-weight: 400;
+}
+
+/* Animações */
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .plans-section {
+        padding: 60px 20px;
+    }
+    
+    .plans-title {
+        font-size: 2.2rem;
+    }
+    
+    .plans-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .plan-card {
+        padding: 25px 20px;
+    }
+    
+    .plans-summary {
+        padding: 30px 20px;
+    }
+    
+    .summary-title {
+        font-size: 1.6rem;
+    }
+    
+    .summary-metrics {
+        gap: 20px;
+    }
+    
+    .summary-metric {
+        min-width: 120px;
+    }
+    
+    .summary-value {
+        font-size: 1.4rem;
+    }
+    
+    .summary-actions {
+        flex-direction: column;
+    }
+    
+    .download-plan, .share-plan {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .plan-modal-content {
+        width: 95%;
+        max-height: 90vh;
+    }
+    
+    .plan-modal-body {
+        max-height: calc(90vh - 100px);
+    }
+    
+    .modal-tabs {
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        padding-bottom: 15px;
+    }
+    
+    .tab-button {
+        white-space: nowrap;
+        font-size: 13px;
+        padding: 10px 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .plans-title {
+        font-size: 1.8rem;
+    }
+    
+    .plans-subtitle {
+        font-size: 1rem;
+    }
+    
+    .plan-title {
+        font-size: 1.3rem;
+    }
+    
+    .plan-features li {
+        font-size: 0.9rem;
+    }
+    
+    .summary-metrics {
+        flex-direction: column;
+        gap: 15px;
+    }
+}
     </style>
 </head>
 <body>
@@ -1506,6 +2357,383 @@
                 </div>
             </div>
         </section>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- PLANOS DE GOVERNO -->
+<section class="plans-section" id="plans-section">
+    <div class="plans-container">
+        <div class="plans-header">
+            <h2 class="plans-title">Plano de Governo 2026</h2>
+            <p class="plans-subtitle">Uma visão clara para o futuro do Distrito Federal. Conheça nossas propostas para cada área essencial do desenvolvimento.</p>
+        </div>
+
+        <div class="plans-grid">
+            <!-- Saúde -->
+            <div class="plan-card" data-category="saude">
+                <div class="plan-icon">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM7 7h4V5.28A2.01 2.01 0 0 1 12 3c1.1 0 2 .9 2 2v1.72l-3 3V7H7v6h10V7h-4v3.28l-3-3V7zm7 10H9v-5h6v5z"/>
+                    </svg>
+                </div>
+                <h3 class="plan-title">Saúde Pública de Qualidade</h3>
+                <ul class="plan-features">
+                    <li>Ampliação de 30% no número de UBS</li>
+                    <li>Telemedicina em todas as regiões</li>
+                    <li>Farmácia popular com medicamentos gratuitos</li>
+                    <li>Investimento em equipamentos de última geração</li>
+                    <li>Programa de prevenção à saúde mental</li>
+                </ul>
+                <div class="plan-metrics">
+                    <div class="metric">
+                        <span class="metric-value">R$ 2,8 bi</span>
+                        <span class="metric-label">Investimento</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-value">+180 dias</span>
+                        <span class="metric-label">Prazo de entrega</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Educação -->
+            <div class="plan-card" data-category="educacao">
+                <div class="plan-icon">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/>
+                    </svg>
+                </div>
+                <h3 class="plan-title">Educação Transformadora</h3>
+                <ul class="plan-features">
+                    <li>Escolas em tempo integral para 50% dos alunos</li>
+                    <li>Tablets educacionais para estudantes do ensino médio</li>
+                    <li>Reforma completa de 200 escolas</li>
+                    <li>Valorização salarial de 30% para professores</li>
+                    <li>Programa de bolsas em universidades particulares</li>
+                </ul>
+                <div class="plan-metrics">
+                    <div class="metric">
+                        <span class="metric-value">R$ 1,5 bi</span>
+                        <span class="metric-label">Investimento</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-value">4 anos</span>
+                        <span class="metric-label">Implementação</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Segurança -->
+            <div class="plan-card" data-category="seguranca">
+                <div class="plan-icon">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/>
+                    </svg>
+                </div>
+                <h3 class="plan-title">Segurança Integrada</h3>
+                <ul class="plan-features">
+                    <li>Modernização do sistema de videomonitoramento</li>
+                    <li>Ampliação do efetivo policial em 25%</li>
+                    <li>Centro integrado de inteligência</li>
+                    <li>Programa de combate à violência doméstica</li>
+                    <li>Parcerias com comunidades em áreas de risco</li>
+                </ul>
+                <div class="plan-metrics">
+                    <div class="metric">
+                        <span class="metric-value">R$ 850 mi</span>
+                        <span class="metric-label">Investimento</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-value">-40%</span>
+                        <span class="metric-label">Meta criminalidade</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Transporte -->
+            <div class="plan-card" data-category="transporte">
+                <div class="plan-icon">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5H15V3H9v2H6.5c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/>
+                    </svg>
+                </div>
+                <h3 class="plan-title">Mobilidade Urbana</h3>
+                <ul class="plan-features">
+                    <li>Expansão de 40km do metrô do DF</li>
+                    <li>500 novos ônibus elétricos</li>
+                    <li>Integração tarifária completa</li>
+                    <li>1.000km de ciclovias</li>
+                    <li>Aplicativo único de mobilidade</li>
+                </ul>
+                <div class="plan-metrics">
+                    <div class="metric">
+                        <span class="metric-value">R$ 3,2 bi</span>
+                        <span class="metric-label">Investimento</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-value">+30%</span>
+                        <span class="metric-label">Eficiência</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Emprego -->
+            <div class="plan-card" data-category="emprego">
+                <div class="plan-icon">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z"/>
+                    </svg>
+                </div>
+                <h3 class="plan-title">Geração de Empregos</h3>
+                <ul class="plan-features">
+                    <li>Incentivos fiscais para empresas geradoras de emprego</li>
+                    <li>Programa "Primeiro Emprego" para jovens</li>
+                    <li>Capacitação profissional gratuita</li>
+                    <li>Fomento ao empreendedorismo local</li>
+                    <li>Parcerias com o setor privado</li>
+                </ul>
+                <div class="plan-metrics">
+                    <div class="metric">
+                        <span class="metric-value">+50 mil</span>
+                        <span class="metric-label">Novas vagas</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-value">R$ 600 mi</span>
+                        <span class="metric-label">Em incentivos</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sustentabilidade -->
+            <div class="plan-card" data-category="sustentabilidade">
+                <div class="plan-icon">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"/>
+                    </svg>
+                </div>
+                <h3 class="plan-title">Sustentabilidade</h3>
+                <ul class="plan-features">
+                    <li>Energia solar em todos os prédios públicos</li>
+                    <li>Expansão da coleta seletiva para 100% do DF</li>
+                    <li>Reflorestamento de áreas degradadas</li>
+                    <li>Programa de eficiência energética</li>
+                    <li>Fomento à agricultura sustentável</li>
+                </ul>
+                <div class="plan-metrics">
+                    <div class="metric">
+                        <span class="metric-value">-30%</span>
+                        <span class="metric-label">Emissões CO²</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-value">R$ 420 mi</span>
+                        <span class="metric-label">Investimento verde</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="plans-summary">
+            <div class="summary-content">
+                <h3 class="summary-title">Visão Estratégica 2026-2030</h3>
+                <p class="summary-text">Nosso plano é baseado em 3 pilares fundamentais: <strong>Pessoas em primeiro lugar</strong>, <strong>Crescimento com sustentabilidade</strong> e <strong>Governo transparente e eficiente</strong>. Acreditamos que o desenvolvimento deve ser inclusivo, sustentável e mensurável.</p>
+                
+                <div class="summary-metrics">
+                    <div class="summary-metric">
+                        <span class="summary-value">R$ 9,8 bilhões</span>
+                        <span class="summary-label">Investimento total planejado</span>
+                    </div>
+                    <div class="summary-metric">
+                        <span class="summary-value">+120 mil</span>
+                        <span class="summary-label">Empregos diretos e indiretos</span>
+                    </div>
+                    <div class="summary-metric">
+                        <span class="summary-value">84 projetos</span>
+                        <span class="summary-label">Iniciativas estruturadas</span>
+                    </div>
+                </div>
+                
+                <div class="summary-actions">
+                    <button class="download-plan" id="downloadPlan">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+                        </svg>
+                        Baixar Plano Completo (PDF)
+                    </button>
+                    <button class="share-plan" id="sharePlan">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/>
+                        </svg>
+                        Compartilhar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Modal para o plano completo -->
+<div class="plan-modal" id="planModal">
+    <div class="plan-modal-content">
+        <div class="plan-modal-header">
+            <h2>Plano de Governo Completo</h2>
+            <button class="close-modal" id="closeModal">✕</button>
+        </div>
+        <div class="plan-modal-body">
+            <div class="modal-tabs">
+                <button class="tab-button active" data-tab="resumo">Resumo Executivo</button>
+                <button class="tab-button" data-tab="metas">Metas e Indicadores</button>
+                <button class="tab-button" data-tab="cronograma">Cronograma</button>
+                <button class="tab-button" data-tab="orcamento">Orçamento</button>
+            </div>
+            
+            <div class="tab-content active" id="resumo-tab">
+                <h3>Resumo Executivo</h3>
+                <p>Nosso plano de governo é estruturado em 6 eixos principais, com 84 projetos específicos que transformarão o Distrito Federal em referência nacional em gestão pública e qualidade de vida.</p>
+                <p>Cada iniciativa foi planejada com base em dados concretos, experiências bem-sucedidas e consulta popular, garantindo que nossas ações atendam às reais necessidades da população.</p>
+            </div>
+            
+            <div class="tab-content" id="metas-tab">
+                <h3>Metas e Indicadores</h3>
+                <p>Estabelecemos metas claras e indicadores mensuráveis para cada área, permitindo o acompanhamento transparente de nossa gestão.</p>
+            </div>
+            
+            <div class="tab-content" id="cronograma-tab">
+                <h3>Cronograma de Implementação</h3>
+                <p>Planejamento detalhado das ações ao longo dos 4 anos de mandato, com marcos trimestrais e avaliações periódicas.</p>
+            </div>
+            
+            <div class="tab-content" id="orcamento-tab">
+                <h3>Orçamento Detalhado</h3>
+                <p>Detalhamento completo das fontes de recursos e alocação orçamentária para cada projeto.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- GALERIA DE FOTOS SIMPLES -->
+        <section class="gallery-section" id="gallery-section">
+            <div class="gallery-container">
+                <div class="gallery-header">
+                    <h2 class="gallery-title">Galeria de Memórias</h2>
+                    <p class="gallery-subtitle">Momentos marcantes da trajetória de José Roberto Arruda em serviço público</p>
+                </div>
+
+                <!-- Grid de Fotos -->
+                <div class="gallery-grid" id="galleryGrid">
+                    <!-- Foto 1 -->
+                    <div class="gallery-item" data-index="0">
+                        <img src="https://i0.wp.com/gamacidadao.com.br/wp-content/uploads/2022/05/jose-roberto-arruda-by-denio-simoes.jpg?fit=900%2C530&ssl=1" alt="José Roberto Arruda em discurso" class="gallery-image">
+                        <div class="gallery-overlay">
+                            <h3 class="gallery-caption"></h3>
+                            <p class="gallery-date"></p>
+                        </div>
+                    </div>
+
+                    <!-- Foto 2 -->
+                    <div class="gallery-item" data-index="1">
+                        <img src="https://www.cl.df.gov.br/documents/10162/3741149/2nIkTsW7.jpg/95607248-19c1-420c-9f7e-b024877b2dad?version=1.0&t=1336839780000" alt="Arruda com comunidade local" class="gallery-image">
+                        <div class="gallery-overlay">
+                            <h3 class="gallery-caption"></h3>
+                            <p class="gallery-date"></p>
+                        </div>
+                    </div>
+
+                    <!-- Foto 3 -->
+                    <div class="gallery-item" data-index="2">
+                        <img src="https://assets.brasildefato.com.br/2024/09/image_processing20220527-2501-1bws310.jpeg" alt="Reunião de trabalho" class="gallery-image">
+                        <div class="gallery-overlay">
+                            <h3 class="gallery-caption"></h3>
+                            <p class="gallery-date"></p>
+                        </div>
+                    </div>
+
+                    <!-- Foto 4 -->
+                    <div class="gallery-item" data-index="3">
+                        <img src="https://static.poder360.com.br/2024/04/JoseRobertoArruda-3-848x477.jpg" alt="Arruda em família" class="gallery-image">
+                        <div class="gallery-overlay">
+                            <h3 class="gallery-caption"></h3>
+                            <p class="gallery-date"></p>
+                        </div>
+                    </div>
+
+                    <!-- Foto 5 -->
+                    <div class="gallery-item" data-index="4">
+                        <img src="https://assets.brasildefato.com.br/2024/09/image_processing20220527-2501-1bws310.jpeg" alt="Inauguração de obra" class="gallery-image">
+                        <div class="gallery-overlay">
+                            <h3 class="gallery-caption"></h3>
+                            <p class="gallery-date"></p>
+                        </div>
+                    </div>
+
+                    <!-- Foto 6 -->
+                    <div class="gallery-item" data-index="5">
+                        <img src="https://www.edibrasilia.com.br/wp-content/uploads/2024/09/arruda.jpg" alt="Entrevista coletiva" class="gallery-image">
+                        <div class="gallery-overlay">
+                            <h3 class="gallery-caption"></h3>
+                            <p class="gallery-date"></p>
+                        </div>
+                    </div>
+
+                    <!-- Foto 7 -->
+                    <div class="gallery-item" data-index="6">
+                        <img src="https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2022/05/10569417.120401.jpg?w=1200&h=675&crop=1" alt="Campanha eleitoral" class="gallery-image">
+                        <div class="gallery-overlay">
+                            <h3 class="gallery-caption"></h3>
+                            <p class="gallery-date"></p>
+                        </div>
+                    </div>
+
+                    <!-- Foto 8 -->
+                    <div class="gallery-item" data-index="7">
+                        <img src="https://s2-g1.glbimg.com/pkrBk0fd27ZnAYkxS7qHyeiWxxA=/1620x0/filters:format(jpeg)/https://i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/0/l/mivmxFTfAUcamctjuGMg/img-7382-1-.jpg" alt="Leitura e estudo" class="gallery-image">
+                        <div class="gallery-overlay">
+                            <h3 class="gallery-caption"></h3>
+                            <p class="gallery-date"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Lightbox Modal -->
+        <div class="lightbox-modal" id="lightboxModal">
+            <div class="lightbox-content">
+                <div class="lightbox-image-container">
+                    <img id="lightboxImage" class="lightbox-image" alt="">
+                    <div class="lightbox-caption">
+                        <h3 id="lightboxTitle" class="lightbox-title"></h3>
+                        <p id="lightboxDescription" class="lightbox-description"></p>
+                    </div>
+                </div>
+                <div class="lightbox-nav">
+                    <button class="lightbox-button" id="prevButton">❮</button>
+                    <button class="lightbox-button" id="nextButton">❯</button>
+                </div>
+                <button class="lightbox-close" id="closeLightbox">✕</button>
+            </div>
+        </div>
     </div>
 
     <!-- Footer Elegante -->
@@ -1550,6 +2778,7 @@
                 <ul class="footer-links">
                     <li><a href="#hero-section">Início</a></li>
                     <li><a href="#humans-section">Sobre</a></li>
+                    <li><a href="#gallery-section">Galeria</a></li>
                     <li><a href="#" class="show-donation">Apoiar Projeto</a></li>
                     <li><a href="#">Tecnologias</a></li>
                     <li><a href="#">Contato</a></li>
@@ -1756,17 +2985,15 @@
                         const isMobile = window.innerWidth <= 768;
                         const vh = window.innerHeight * 0.01;
                         
-                        if (!isMobile) {
-                            const maxHeight = window.innerHeight * 0.85;
-                            document.querySelector('.donation-popup').style.maxHeight = `${maxHeight}px`;
-                            
+                        if (isMobile) {
+                            // No mobile: altura do conteúdo deve permitir scroll
                             const popup = document.querySelector('.donation-popup');
                             const headerHeight = document.querySelector('.popup-header').offsetHeight;
                             const buttonsHeight = document.querySelector('.popup-buttons').offsetHeight;
-                            const padding = 40;
                             
-                            const contentMaxHeight = maxHeight - headerHeight - buttonsHeight - padding - 20;
-                            this.popupContent.style.maxHeight = `${contentMaxHeight}px`;
+                            // Ajusta a altura máxima do conteúdo
+                            const maxContentHeight = window.innerHeight * 0.9 - headerHeight - buttonsHeight - 40;
+                            this.popupContent.style.maxHeight = `${maxContentHeight}px`;
                         }
                     };
                     
@@ -1812,6 +3039,7 @@
                         }
                     });
                     
+                    // Impedir scroll do background quando estiver scrollando no popup
                     this.popupContent.addEventListener('wheel', (e) => {
                         const isAtTop = this.popupContent.scrollTop === 0;
                         const isAtBottom = this.popupContent.scrollHeight - this.popupContent.scrollTop === this.popupContent.clientHeight;
@@ -2300,6 +3528,130 @@
                 }
             }
             
+            // Sistema da Galeria Simples
+            class GallerySystem {
+                constructor() {
+                    this.galleryItems = document.querySelectorAll('.gallery-item');
+                    this.lightboxModal = document.getElementById('lightboxModal');
+                    this.lightboxImage = document.getElementById('lightboxImage');
+                    this.lightboxTitle = document.getElementById('lightboxTitle');
+                    this.lightboxDescription = document.getElementById('lightboxDescription');
+                    this.prevButton = document.getElementById('prevButton');
+                    this.nextButton = document.getElementById('nextButton');
+                    this.closeLightbox = document.getElementById('closeLightbox');
+                    
+                    this.currentIndex = 0;
+                    
+                    this.init();
+                }
+                
+                init() {
+                    this.setupEventListeners();
+                }
+                
+                setupEventListeners() {
+                    // Clique nas imagens
+                    this.galleryItems.forEach((item, index) => {
+                        item.addEventListener('click', () => {
+                            this.openLightbox(index);
+                        });
+                    });
+                    
+                    // Navegação do lightbox
+                    this.prevButton.addEventListener('click', () => {
+                        this.navigateLightbox(-1);
+                    });
+                    
+                    this.nextButton.addEventListener('click', () => {
+                        this.navigateLightbox(1);
+                    });
+                    
+                    // Fechar lightbox
+                    this.closeLightbox.addEventListener('click', () => {
+                        this.closeLightboxModal();
+                    });
+                    
+                    // Fechar com ESC
+                    document.addEventListener('keydown', (e) => {
+                        if (e.key === 'Escape' && this.lightboxModal.classList.contains('active')) {
+                            this.closeLightboxModal();
+                        }
+                        if (e.key === 'ArrowLeft' && this.lightboxModal.classList.contains('active')) {
+                            this.navigateLightbox(-1);
+                        }
+                        if (e.key === 'ArrowRight' && this.lightboxModal.classList.contains('active')) {
+                            this.navigateLightbox(1);
+                        }
+                    });
+                    
+                    // Fechar ao clicar fora da imagem
+                    this.lightboxModal.addEventListener('click', (e) => {
+                        if (e.target === this.lightboxModal) {
+                            this.closeLightboxModal();
+                        }
+                    });
+                }
+                
+                openLightbox(index) {
+                    this.currentIndex = index;
+                    const item = this.galleryItems[index];
+                    
+                    if (!item) return;
+                    
+                    const image = item.querySelector('.gallery-image');
+                    const caption = item.querySelector('.gallery-caption');
+                    const date = item.querySelector('.gallery-date');
+                    
+                    this.lightboxImage.src = image.src;
+                    this.lightboxTitle.textContent = caption.textContent;
+                    this.lightboxDescription.textContent = date.textContent;
+                    
+                    this.lightboxModal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                    
+                    // Animação de entrada
+                    setTimeout(() => {
+                        this.lightboxModal.style.opacity = '1';
+                    }, 10);
+                }
+                
+                navigateLightbox(direction) {
+                    this.currentIndex += direction;
+                    
+                    // Loop circular
+                    if (this.currentIndex < 0) {
+                        this.currentIndex = this.galleryItems.length - 1;
+                    } else if (this.currentIndex >= this.galleryItems.length) {
+                        this.currentIndex = 0;
+                    }
+                    
+                    const item = this.galleryItems[this.currentIndex];
+                    const image = item.querySelector('.gallery-image');
+                    const caption = item.querySelector('.gallery-caption');
+                    const date = item.querySelector('.gallery-date');
+                    
+                    // Animação de transição
+                    this.lightboxImage.style.opacity = '0';
+                    
+                    setTimeout(() => {
+                        this.lightboxImage.src = image.src;
+                        this.lightboxTitle.textContent = caption.textContent;
+                        this.lightboxDescription.textContent = date.textContent;
+                        
+                        this.lightboxImage.style.opacity = '1';
+                    }, 300);
+                }
+                
+                closeLightboxModal() {
+                    this.lightboxModal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                    
+                    setTimeout(() => {
+                        this.lightboxModal.style.opacity = '0';
+                    }, 300);
+                }
+            }
+            
             // Sistema do Footer
             class FooterSystem {
                 constructor() {
@@ -2414,6 +3766,7 @@
                 const waterEffect = new WaterEffect();
                 const donationSystem = new DonationSystem();
                 const musicSystem = new MusicSystem();
+                const gallerySystem = new GallerySystem();
                 const footerSystem = new FooterSystem();
                 
                 window.addEventListener('beforeunload', () => {
@@ -2424,9 +3777,158 @@
                 window.waterEffectInstance = waterEffect;
                 window.donationSystem = donationSystem;
                 window.musicSystem = musicSystem;
+                window.gallerySystem = gallerySystem;
                 window.footerSystem = footerSystem;
             });
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // Sistema de Planos de Governo
+class PlansSystem {
+    constructor() {
+        this.downloadPlan = document.getElementById('downloadPlan');
+        this.sharePlan = document.getElementById('sharePlan');
+        this.planModal = document.getElementById('planModal');
+        this.closeModal = document.getElementById('closeModal');
+        this.tabButtons = document.querySelectorAll('.tab-button');
+        this.tabContents = document.querySelectorAll('.tab-content');
+        
+        this.init();
+    }
+    
+    init() {
+        this.setupEventListeners();
+        this.setupAnimations();
+    }
+    
+    setupEventListeners() {
+        // Botão de download
+        this.downloadPlan.addEventListener('click', () => {
+            this.showPlanModal();
+        });
+        
+        // Botão de compartilhar
+        this.sharePlan.addEventListener('click', () => {
+            this.sharePlans();
+        });
+        
+        // Fechar modal
+        this.closeModal.addEventListener('click', () => {
+            this.closePlanModal();
+        });
+        
+        // Fechar modal ao clicar fora
+        this.planModal.addEventListener('click', (e) => {
+            if (e.target === this.planModal) {
+                this.closePlanModal();
+            }
+        });
+        
+        // Tabs do modal
+        this.tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const tabId = button.getAttribute('data-tab');
+                this.switchTab(tabId, button);
+            });
+        });
+        
+        // Fechar com ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && this.planModal.classList.contains('active')) {
+                this.closePlanModal();
+            }
+        });
+    }
+    
+    setupAnimations() {
+        // Animar cards ao scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animated');
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+        
+        document.querySelectorAll('.plan-card').forEach(card => {
+            observer.observe(card);
+        });
+    }
+    
+    showPlanModal() {
+        this.planModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        
+        // Animação de entrada
+        setTimeout(() => {
+            this.planModal.style.opacity = '1';
+        }, 10);
+    }
+    
+    closePlanModal() {
+        this.planModal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+        
+        setTimeout(() => {
+            this.planModal.style.opacity = '0';
+        }, 300);
+    }
+    
+    switchTab(tabId, clickedButton) {
+        // Remover classe active de todos os botões e conteúdos
+        this.tabButtons.forEach(btn => btn.classList.remove('active'));
+        this.tabContents.forEach(content => content.classList.remove('active'));
+        
+        // Adicionar classe active ao botão clicado
+        clickedButton.classList.add('active');
+        
+        // Mostrar conteúdo correspondente
+        document.getElementById(`${tabId}-tab`).classList.add('active');
+    }
+    
+    sharePlans() {
+        const shareData = {
+            title: 'Plano de Governo Arruda 2026',
+            text: 'Conheça o plano completo para o futuro do Distrito Federal!',
+            url: window.location.href + '#plans-section'
+        };
+        
+        if (navigator.share) {
+            navigator.share(shareData)
+                .then(() => console.log('Compartilhado com sucesso!'))
+                .catch(error => console.log('Erro ao compartilhar:', error));
+        } else {
+            // Fallback para copiar link
+            navigator.clipboard.writeText(shareData.url)
+                .then(() => {
+                    const originalText = this.sharePlan.innerHTML;
+                    this.sharePlan.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Link copiado!';
+                    
+                    setTimeout(() => {
+                        this.sharePlan.innerHTML = originalText;
+                    }, 3000);
+                })
+                .catch(err => {
+                    console.error('Erro ao copiar:', err);
+                });
+        }
+    }
+}
     </script>
 </body>
 </html>
